@@ -38,11 +38,11 @@ The first word could be please
 last word we can interpret standard
 ☣️ = t, 🦇 = n, 🔮 = r
 
-so now we got deadface{please_tr?_??t_??_ne?_standard}
+so now we got deadface{please_tr? _??t _??_ne?_standard}
 Now it's readable we know tr? is try for sure and the ne? is new.
 deadface{please_try_--- --_new_standard}
 
-now we can fully solve it with command sense
+now we can fully solve it with common sense
 deadface{please_try_out_my_new_standard}
 
 ## flag
