@@ -24,9 +24,12 @@ inside json:
 ````
 
 1. The two .enc files are in similar size (250 & 220 bytes) the processing is length-preserving. So it's the xor encryption.
-2. Both of the files start with the same 9 bytes which are the shared plaintext prefix {"type":". So the same plaintext at the same position -> reuse nonce and using the same keystream.
+2. The encrypted heartbeat and tasking files also share the same initial nine bytes which are the shared plaintext prefix {"type":". So the same plaintext at the same position -> reuse nonce and using the same keystream.
 ![show-bytes](/Cryptography/pic/hex-second-shift.png)
-3. Now we have to just recover the keystream by xor the plaintext with the ciphertext then recover teh tasking_plaintext by xor keystream with teh relay-tasking.enc
+3. Now we have to just recover the keystream by xor the plaintext with the ciphertext then recover the tasking_plaintext by xor keystream with the relay-tasking.enc
+
+```Ciphertext = Plaintext XOR Keystream```
+
 
 ## code
 ``` python
@@ -47,3 +50,11 @@ b'{"type":"tasking","target":"aurora-vpn","action":"stage-access","window":"00:3
 
 ## flag:
 deadface{ctr_nonce_reuse_breaks_confidentiality}
+
+## Lessons Learned
+
+Never reuse a CTR nonce with the same key. Doing so repeats the keystream and can expose encrypted messages.
+
+Known plaintext can be dangerous when keystreams are reused. A known plaintext-ciphertext pair can reveal the keystream for the corresponding positions.
+
+Preserve original files during analysis. Comparing plaintext and ciphertext helps identify encryption patterns and implementation weaknesses.
