@@ -11,7 +11,7 @@ Submit the flag as deadface{###}
 
 attachment:
 
-![decoddle](/Cryptography/pic/decode-Dle-chal.png)
+![decoddle](/assets/crypto/decode-Dle-chal.png)
 
 ## solution
 

@@ -25,7 +25,7 @@ inside json:
 
 1. The two .enc files are in similar size (250 & 220 bytes) the processing is length-preserving. So it's the xor encryption.
 2. The encrypted heartbeat and tasking files also share the same initial nine bytes which are the shared plaintext prefix {"type":". So the same plaintext at the same position -> reuse nonce and using the same keystream.
-![show-bytes](/Cryptography/pic/hex-second-shift.png)
+![show-bytes](assets/crypto/hex-second-shift.png)
 3. Now we have to just recover the keystream by xor the plaintext with the ciphertext then recover the tasking_plaintext by xor keystream with the relay-tasking.enc
 
 ```Ciphertext = Plaintext XOR Keystream```
@@ -44,7 +44,7 @@ k = bytes(a ^ b for a, b in zip(p, c))        # recover keystream
 print(bytes(a ^ b for a, b in zip(t, k)))     # decrypt tasking
 ```
 
-![solved](/Cryptography/pic/second-shift-solved.png)
+![solved](/assets/crypto/second-shift-solved.png)
 
 b'{"type":"tasking","target":"aurora-vpn","action":"stage-access","window":"00:30Z","operator":"mort1cia","note":"Use the backup tunnel. Archive bundle under DEADFACE{ctr_nonce_reuse_breaks_confidentiality} before exfil."}'
 
